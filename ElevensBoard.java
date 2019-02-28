@@ -53,7 +53,11 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if(containsPairSum11(selectedCards) || containsJQK(selectedCards)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -66,8 +70,9 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean anotherPlayIsPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		return (containsPairSum11(cardIndexes()) || containsJQK(cardIndexes()));
 	}
+
 
 	/**
 	 * Check for an 11-pair in the selected cards.
@@ -79,6 +84,14 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if(selectedCards.size() != 2) {
+			return false;
+		}
+		if(cardAt(0).pointValue() + cardAt(1).pointValue() == 11) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -90,6 +103,26 @@ public class ElevensBoard extends Board {
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		int j = 0; int k = 0; int q = 0;
+		if(selectedCards.size() != 3) {
+			return false;
+		}
+		for(int i = 0; i < selectedCards.size(); i++) {
+			if(cardAt(i).rank().equals("jack")) {
+				j++;
+			}
+			if(cardAt(i).rank().equals("king")) {
+				k++;
+			}
+			if(cardAt(i).rank().equals("queen")) {
+				q++;
+			}
+		}
+		if(j > 0 && k > 0 && q > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
+
 }
